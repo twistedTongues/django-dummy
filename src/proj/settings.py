@@ -34,7 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hello_world'
+    'hello_world',
+    'references',
+    'books'
 ]
 
 MIDDLEWARE = [
@@ -101,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Minsk'
 
@@ -119,6 +121,3 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/twistedtongues/django-dummy/static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/twistedtongues/django-dummy/media'
-
-
-VASILY = "Василий"
