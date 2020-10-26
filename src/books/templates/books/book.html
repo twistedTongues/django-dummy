@@ -1,0 +1,41 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+<div>
+  <h1> This is {{book.books}}</h1>
+  Title of the Book - {{ book.books }} <br>
+  Description - {{ book.description }} <br>
+  Price - {{ book.price }} <br>
+  Author - {{ book.author.all.0 }} <br>
+  Title of the Serie - {{ book.series }} <br>
+  Genre - {{ book.genres.all.0 }} <br>
+  Date of establishment - {{ book.date_of_establishment }} <br>
+  Amount of Pages - {{ book.amount_of_pages }} <br>
+  Binding - {{ book.binding }} <br>
+  Format - {{ book.format }} <br>
+  ISBN - {{ book.isbn_id }} <br>
+  Book's weight in Weight (g) - {{ book.book_weight }} <br>
+  Age limit - {{ book.age_limit }} <br>
+  PublishingHouse - {{ book.pub_house }} <br>
+  Conditions - {{ book.conditions }} <br>
+  Number of Books Available - {{ book.number_of_books }} <br>
+  Book Status - {{ book.book_availability }} <br>
+  Rating of the book - {{ book.rating }} <br>
+  Language - {{ book.languages.all.0 }} <br>
+  Created - {{ book.book_adding_date|date:"" }} <br>
+  Updated - {{ book.book_updating_date }} <br>
+
+
+
+</div>
+</body>
+</html>

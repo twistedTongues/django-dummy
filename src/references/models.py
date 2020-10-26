@@ -30,7 +30,7 @@ class Genre(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.genres
 
 
 class Language(models.Model):
@@ -41,16 +41,6 @@ class Language(models.Model):
 
     def __str__(self):
         return self.languages
-
-
-# class Condition(models.Model):
-#     conditions = models.CharField(
-#         'Condition',
-#         max_length=30,
-#     )
-#
-#     def __str__(self):
-#         return self.conditions
 
 
 class BookSeries(models.Model):
