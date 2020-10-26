@@ -1,0 +1,20 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+<div>
+  <h1>Total objects: {{ book_keys|length }}
+    {% for book in book_keys %}
+    <a href="/book/{{ book.pk }}">{{ book.books }} in {{ book.format }}</a> <br>
+    {% endfor %}
+</div>
+</body>
+</html>

@@ -9,7 +9,7 @@ from datetime import date
 class Book(models.Model):
     books = models.CharField(
         'Title of the Book',
-        max_length=100
+        max_length=1000
     )
 
     description = models.TextField(
@@ -19,7 +19,9 @@ class Book(models.Model):
     )
     photo_cover = models.ImageField(
         "Cover of the book",
-        upload_to='media/'
+        upload_to='media/',
+        blank=True,
+        null=True
     )
 
     price = models.DecimalField(
@@ -27,29 +29,34 @@ class Book(models.Model):
         default=0,
         max_digits=10,
         decimal_places=3,
+        blank=False,
+        null=False
     )
 
     author = models.ManyToManyField(
         Author,
-        verbose_name="Author"
+        verbose_name="Author",
+        related_name="book"
     )
 
     series = models.ForeignKey(
         BookSeries,
         verbose_name="Title of the Serie",
         default=1,
+        related_name="book",
         on_delete=models.PROTECT
     )
 
     genres = models.ManyToManyField(
         Genre,
-        verbose_name="Genre"
+        verbose_name="Genre",
+        related_name="book"
     )
 
     date_of_establishment = models.DateTimeField(
         verbose_name="Date of establishment",
-        null=True,
         blank=True,
+        null=True
 
     )
 
@@ -83,7 +90,7 @@ class Book(models.Model):
     )
 
     isbn_id = models.CharField(
-        "ISBN",
+        verbose_name="ISBN",
         default='',
         max_length=20,
     )
@@ -91,8 +98,6 @@ class Book(models.Model):
     book_weight = models.PositiveIntegerField(
         verbose_name="Book's weight in Weight (g)",
         default=0,
-        blank=True,
-        null=True
     )
 
     age_limit_choice = (('1', '3+'), ('2', '6+'), ('3', '12+'), ('4', '14+'),
@@ -101,27 +106,23 @@ class Book(models.Model):
     age_limit = models.CharField(
         verbose_name="Age limit",
         default=1,
-        max_length=100,
+        max_length=4,
         choices=age_limit_choice,
     )
 
     pub_house = models.ForeignKey(
         PublishingHouse,
         default=1,
+        related_name="book",
         on_delete=models.PROTECT
     )
 
-    languages = models.ManyToManyField(
-        Language,
-        verbose_name="Language",
-        default=1
-    )
     condition_choice = (('1', 'New'), ('2', 'Used'), ('3', 'Collectible'))
 
     conditions = models.CharField(
         verbose_name="conditions",
         default=1,
-        max_length=1,
+        max_length=4,
         choices=condition_choice
     )
 
@@ -131,27 +132,49 @@ class Book(models.Model):
 
     )
 
+    AVAILABLE = [
+        ('yes', "AVAILABLE"),
+        ('no', 'NOT AVAILABLE')
+    ]
+
+    book_availability = models.CharField(
+        'Book Status',
+        max_length=20,
+        default='no',
+        choices=AVAILABLE
+    )
+
     rating_choice = (('0', '0'), ('1', '1'), ('2', '2'), ('3', '3'),
                      ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'),
                      ('8', '8'), ('9', '9'), ('10', '10'))
 
     rating = models.CharField(
         verbose_name="Rating of the book",
-        max_length=10,
+        max_length=5,
+        default=0,
         choices=rating_choice,
     )
 
-    update_date = models.DateTimeField(
-        "Date of updating Book",
-        null=True,
-        blank=True
+    book_adding_date = models.DateField(
+        verbose_name='Publishing date in shop',
+        auto_now=False,
+        auto_now_add=True
     )
 
-    pub_date_in_magazine = models.DateField(
-        verbose_name="Publishing date in magazine",
-        default=date.today,
+    book_updating_date = models.DateTimeField(
+        verbose_name='Date of updating Book',
+        auto_now=True,
+        auto_now_add=False
+    )
 
+    languages = models.ManyToManyField(
+        Language,
+        verbose_name="Language",
     )
 
     def __str__(self):
-        return self.books
+        return f'{self.books} | Book was added: {self.book_adding_date} | \
+                Last updated: {self.book_updating_date}'
+
+
+# CRUD
