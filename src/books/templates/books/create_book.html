@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>My book-shelf</title>
+    <title>Creating book</title>
 
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -11,10 +11,12 @@
 
 <body>
 <div>
-  <h1>Total objects: {{ book_keys|length }}</h1>
-    {% for book in book_keys %}
-    <a href="book/{{ book.pk }}">{{ book.books }} in {{ book.format }}</a> <br>
-    {% endfor %}
+  <h1>Create Book</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+  <button type="submit">submit</button>
+  </form>
 </div>
 </body>
 </html>
