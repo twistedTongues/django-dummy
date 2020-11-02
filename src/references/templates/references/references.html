@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>References</title>
+</head>
+<body>
+    <h1>{{ type.languages }}</h1>
+    <h1>{{ type.pubhouse }}</h1>
+    <h1>{{ type.genres }}</h1>
+    <h1>{{ type.author }}</h1>
+    <h1>{{ type.series }}</h1>
+    {{ type.description }}
+    <h2>Books:</h2>
+    <!-- {% for book in book_keys %}
+    <a href="/book/{{ book.pk }}">{{ book.books }} in {{ book.format}}</a> <br>
+    {% endfor %} -->
+    {% for book in type.book_keys %}
+    <a href="/books/book/{{ book.pk }}">{{ book.books }}</a> <br>
+    {% endfor %}
+</body>
+</html>

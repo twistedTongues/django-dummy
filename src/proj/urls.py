@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include
 
-from books.views import show_book_list_view, show_book_by_pk_view
+# from books.views import show_book_list_view, show_book_by_pk_view
+# from books import views
 
 from hello_world.views import hello_world
 from django.conf import settings
@@ -24,9 +26,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello_world/', hello_world),
-    path('book/<int:book_id>/', show_book_by_pk_view),
-    path('', show_book_list_view),
+    path('', hello_world),
+    path('books/', include('books.urls')),
+    path('references/', include('references.urls')),
 ]
 
 if settings.DEBUG:
