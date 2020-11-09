@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from django.conf.urls.static import static
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'hello_world',
     'references',
     'books',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +67,11 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    '/var/www/static/',
 ]
 
 WSGI_APPLICATION = 'proj.wsgi.application'
@@ -121,3 +128,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/twistedtongues/django-dummy/static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/twistedtongues/django-dummy/media'
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
