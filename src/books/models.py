@@ -1,6 +1,5 @@
 from django.db import models
 from references.models import *
-#
 from datetime import date
 
 # Create your models here.
@@ -15,11 +14,12 @@ class Book(models.Model):
     description = models.TextField(
         'About Book',
         blank=True,
-        null=True
+        null=True,
+        max_length=300,
     )
     photo_cover = models.ImageField(
         "Cover of the book",
-        upload_to='media/',
+        upload_to='',
         blank=True,
         null=True
     )
@@ -28,7 +28,7 @@ class Book(models.Model):
         "Price in USA dollars",
         default=0,
         max_digits=10,
-        decimal_places=3,
+        decimal_places=2,
         blank=False,
         null=False
     )
@@ -110,7 +110,7 @@ class Book(models.Model):
         choices=age_limit_choice,
     )
 
-    pub_house = models.ForeignKey(
+    pubhouse = models.ForeignKey(
         PublishingHouse,
         default=1,
         related_name="book",
@@ -173,8 +173,9 @@ class Book(models.Model):
     )
 
     def __str__(self):
-        return f'{self.books} | Book was added: {self.book_adding_date} | \
-                Last updated: {self.book_updating_date}'
+        return f'{self.books} | Book was added: {self.book_adding_date}'
+        # | Last updated: {self.book_updating_date}'
 
 
-# CRUD
+class Meta:
+    verbose_name = 'Book'

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>References</title>
+<style type="text/css">
+
+  .all_references {
+    margin-top: 150px;
+
+    }
+    .all_references_references {
+      margin-bottom: 40px;
+      font-size: 400%;
+      }
+</style>
+<div class="all_references">
+  <h1 class="text-center all_references_references">References</h1>
+  <div class="row">
+    <div class="col align-self-start"">
+      <div class="card bg-success mb-3" style="width: 11rem;">
+        <div class="card-header">
+          <a href="author" class="text-white">Author:</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for author in author %}
+          <li class="list-group-item"><a href="author/{{ author.pk }}" class="text-success">{{ author.author }}</a> </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="col align-self-start">
+      <div class="card bg-warning mb-3" style="width: 11rem;">
+        <div class="card-header">
+          <a href="language" class="text-white">Language:</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for languages in languages %}
+          <li class="list-group-item"><a href="language/{{ languages.pk }}" class="text-warning">{{ languages.languages }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="col align-self-start">
+      <div class="card bg-primary mb-3" style="width: 11rem;">
+        <div class="card-header">
+          <a href="genre" class="text-white">Genre:</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for genre in genres %}
+          <li class="list-group-item"><a href="genre/{{ genre.pk }}">{{ genre.genres }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="col align-self-start">
+      <div class="card bg-danger mb-3" style="width: 11rem;">
+        <div class="card-header">
+          <a href="series" class="text-white">Book Series:</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for series in series %}
+          <li class="list-group-item"><a href="series/{{ series.pk }}" class="text-danger">{{ series.series }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="col align-self-start">
+      <div class="card bg-info mb-3" style="width: 11rem;">
+        <div class="card-header">
+          <a href="pubhouse" class="text-white">Publishing House:</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for pubhouse in pubhouse %}
+          <li class="list-group-item"><a href="pubhouse/{{ pubhouse.pk }}" class="text-info">{{ pubhouse.pubhouse }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

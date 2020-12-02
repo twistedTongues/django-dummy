@@ -20,15 +20,18 @@ from django.conf.urls import include
 # from books.views import show_book_list_view, show_book_by_pk_view
 # from books import views
 
-from hello_world.views import hello_world
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', hello_world),
+    path('', include('hello_world.urls')),
     path('books/', include('books.urls')),
     path('references/', include('references.urls')),
+    path('cart/', include('cart.urls', namespace="cart")),
+    path('account/', include('user_auth.urls')),
+    path('order/', include('order.urls', namespace='order')),
+
 ]
 
 if settings.DEBUG:

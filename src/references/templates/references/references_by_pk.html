@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<title> {{ object.name }}</title>
+<style type="text/css">
+
+  .references_by_pk {
+    margin-top: 150px;
+
+    }
+</style>
+<div class="references_by_pk" <h1>{{ object.name }}</h1>
+  <h3>Books:</h3>
+  <table class="table table-striped text-center table-responsive">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Book's name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Date of establishment</th>
+        <th scope="col">Number of Books</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Condition</th>
+        <th scope="col">Amount of Pages</th>
+        <th scope="col">Book Avability</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in object_list %}
+      <tr>
+        <th scope="row">{{ book.pk }}</th>
+        <td>{{ book.books }} </td>
+        <td>{{ book.price }} </td>
+        <td>{{ book.date_of_establishment }} </td>
+        <td>{{ book.number_of_books }} </td>
+        <td>{{ book.rating }} </td>
+        <td>{{ book.get_conditions_display }} </td>
+        <td>{{ book.amount_of_pages }} </td>
+        <td>{% if book.active == True %} <i class="fas fa-check"></i> {% else %} <i class="fas fa-times"></i> {% endif %}</td>
+        <td><a href="/books/{{ book.pk }}" class="btn btn-outline-primary"><i class="far fa-eye"></i></a> {% if user.is_staff %} <a href="/books/update/{{ book.pk }}" class="btn btn-outline-warning"><i class="far fa-edit"></i></a> <a
+            href="/books/delete/{{ book.pk }}" class="btn btn-outline-danger"><i class="far fa-trash-alt"></i></a>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% include 'pagination.html' %}
+{% endblock %}
