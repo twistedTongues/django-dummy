@@ -1,0 +1,215 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en>
+
+<head>
+<meta charset=" utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/b8dd6c7559.js" crossorigin="anonymous"></script>
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+<link rel="stylesheet" href="{% static 'scroll.css' %}">
+
+<!-- FavIcon -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://i.imgur.com/ON6DejQ.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.imgur.com/4GOZgmt.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://i.imgur.com/IRrmhWx.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- FavIcon -->
+
+
+</head>
+
+<body>
+  <!-- Scroll Progress -->
+
+  <div id="progressBar"></div>
+  <div id="scrollPath"></div>
+
+  <!-- Scroll Progress -->
+
+  <!-- Navbar -->
+  {% if user.is_anonymous %}
+    {% include 'navbar_anon.html' %}
+  {% endif %}
+
+  {% if user.is_authenticated %}
+    {% include 'navbar_auth.html' %}
+  {% endif %}
+
+  {% if user.is_authenticated %}
+    {% include 'navbar_auth.html' %}
+  {% endif %}
+
+  {% if user.is_staff %}
+    {% include 'navbar_staff.html' %}
+  {% endif %}
+  <!-- Navbar -->
+
+
+  <div class="container">
+    {% block content %}
+
+    {% endblock %}
+  </div>
+
+
+  <!-- Footer -->
+  <footer class="page-footer font-small mdb-color lighten-3 pt-4 border-top" id="contacts">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+
+      <!-- Grid row -->
+      <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+
+          <!-- Content -->
+          <h5 class="font-weight-bold text-uppercase mb-4">Footer Content</h5>
+          <p>Here you can use rows and columns to organize your footer content.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit amet numquam iure provident voluptate
+            esse
+            quasi, veritatis totam voluptas nostrum.</p>
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
+
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mb-4">About</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <p>
+                <a href="#!">PROJECTS</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <a href="#!">ABOUT US</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <a href="#!">BLOG</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <a href="#!">AWARDS</a>
+              </p>
+            </li>
+          </ul>
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
+
+          <!-- Contact details -->
+          <h5 class="font-weight-bold text-uppercase mb-4">Address</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <p>
+                <i class="fas fa-home mr-3"></i> New York, NY 10012, US
+              </p>
+            </li>
+            <li>
+              <p>
+                <i class="fas fa-envelope mr-3"></i> info@example.com
+              </p>
+            </li>
+            <li>
+              <p>
+                <i class="fas fa-phone mr-3"></i> + 01 234 567 88
+              </p>
+            </li>
+            <li>
+              <p>
+                <i class="fas fa-print mr-3"></i> + 01 234 567 89
+              </p>
+            </li>
+          </ul>
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 text-center mx-auto my-4">
+
+          <!-- Social buttons -->
+          <h5 class="font-weight-bold text-uppercase mb-4">Follow Us</h5>
+
+          <!-- Facebook -->
+          <a type="button" class="btn-floating btn-fb">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <!-- Twitter -->
+          <a type="button" class="btn-floating btn-tw">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <!-- Google +-->
+          <a type="button" class="btn-floating btn-gplus">
+            <i class="fab fa-google-plus-g"></i>
+          </a>
+          <!-- Dribbble -->
+          <a type="button" class="btn-floating btn-dribbble">
+            <i class="fab fa-dribbble"></i>
+          </a>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href="https://"> Old.com</a>
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+
+<!-- Scroll Indicator -->
+
+  var progress = document.getElementById('progressBar');
+  var totalHeight = document.body.scrollHeight -window.innerHeight;
+  window.onscroll = function() {
+    var progressHeight = (window.pageYOffset / totalHeight) * 100;
+    progress.style.height = progressHeight + "%";
+  };
+
+<!-- Scroll Indicator -->
+  </script>
+
+</body>
+
+</html>

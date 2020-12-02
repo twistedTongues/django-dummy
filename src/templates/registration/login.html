@@ -1,0 +1,43 @@
+{% extends "auth_base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<title>Sign In</title>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <a href=" ">
+      <h2 class="active">Sign In</h2>
+    </a>
+    <a href="/account/register/?next={{ next }}">
+      <h2 class="inactive underlineHover"> Sign Up</h2>
+    </a>
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">Your username and password didn't match. Please try again.</div>
+    {% endif %}
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="https://i.imgur.com/sn1EUjp.jpg" id="icon" alt="User Icon">
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <form>
+        <!-- <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" maxlength="50" required> -->
+        <input type="text" id="login" class="fadeIn second" name="username" placeholder="login" maxlength="50" value="login" required>
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" required>
+        <input type="submit" class="fadeIn fourth" value="login">
+        <input type="hidden" name="next" value="{{ next }}">
+      </form>
+
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="/account/reset_password">Forgot Password?</a>
+      </div>
+
+  </div>
+</div>
+
+{% endblock %}

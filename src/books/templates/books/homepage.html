@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<title>BookUs</title>
+
+<!-- <div id="totalObjects">
+  <h1>Total objects: {{ object_list|length }}</h1>
+  {% for book in object_list %}
+  <a href="{{ book.pk }}">{{ book.books }}</a> <a href="update/{{ book.pk }}" class="btn btn-info btn-sm">Update</a> <a href="delete/{{ book.pk }}" class="btn btn-danger btn-sm">Delete</a><br>
+  {% endfor %}
+</div> -->
+
+<!-- {% if messages %}
+{% for message in messages %}
+<div class="alert alert-danger" role="alert">
+{{ message }}
+</div>
+{% endfor %}
+{% endif %} -->
+
+<div class="row" id="about">
+  <div class="col-lg-12 my-4 ">
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <a href="/books"><img class="d-block w-100" src="https://i.imgur.com/mzrcHr6.png" alt="First slide"><a>
+        </div>
+        <div class="carousel-item">
+          <a href="books"><img class="d-block w-100" src="https://i.imgur.com/Jajpaks.png" alt="Second slide"><a>
+        </div>
+        <div class="carousel-item">
+          <a href="/references"><img class="d-block w-100" src="https://i.imgur.com/LSlwgzE.png" alt="Third slide"></a>
+        </div>
+      </div>
+      <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previou</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a> -->
+    </div>
+  </div>
+</div>
+
+<div class="container card-deck" id="myCards">
+  <div class="row" id="lib">
+    {% for book in object_list %}
+    <!-- <div class="card" style="width: 18rem;">
+      <img {% if book.photo_cover %} src="{{ MEDIA_URL }}{{ book.photo_cover.url }}" {% endif %} class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-book-dead fa-lg" id="deadBook"></i>{{ book.books}}</h5>
+        <p class="card-text">{{ book.description }}</p>
+        <a href="{{ book.pk }}" class="btn btn-primary">View</a>
+        <a href="update/{{ book.pk }}" class="btn btn-info">Update</a>
+        <a href="delete/{{ book.pk }}" class="btn btn-danger">Delete</a>
+      </div>
+    </div> -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card h-100">
+        <img {% if book.photo_cover %} src="{{ MEDIA_URL }}{{ book.photo_cover.url }}" {% endif %} class="card-img-top" alt="...">
+        <div class="card-body">
+          <a href="{{ book.pk }}" class="text-dark card-title"><i class="fas fa-book fa-lg" id="deadBook"></i>
+            <h4>{{ book.books }}</h4>
+          </a>
+
+          <h6>{% for author in book.author.all %}{{ author }} {% endfor %}</h6>
+          <h6>{{ book.get_binding_display }}</h6>
+          <h6>{{ book.get_conditions_display }}</h6>
+          <p class="card-text">{{ book.description }}</p>
+          <h4 >{{ book.price }} $</h4>
+        </div>
+        <div class="card-footer">
+          <a href="/books/{{ book.pk }}" class="btn btn-primary"><i class="far fa-eye mx-2"></i></a>
+          {% if user.is_authenticated %}
+          <a href="{% url 'cart:cart' %}?book={{ book.pk }}" class="btn btn-success"><i class="fas fa-cart-arrow-down mx-2"></i></a>
+          {% endif %}
+          {% if user.is_staff %}
+           <a href="/books/update/{{ book.pk }}" class="btn btn-warning"><i class="far fa-edit mx-2"></i></a>
+           <a href="/books/delete/{{ book.pk }}" class="btn btn-danger"><i class="far fa-trash-alt mx-2"></i></a>
+           {% endif %}
+          <!-- <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small> -->
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+  {% include 'pagination.html' %}
+
+  {% endblock %}

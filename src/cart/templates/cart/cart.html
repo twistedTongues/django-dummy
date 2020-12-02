@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- {% load crispy_forms_tags %} -->
+
+
+{% block content %}
+<title>My Cart</title>
+
+<style type="text/css">
+  .shopping-cart {
+
+    margin-top: 150px;
+    margin-bottom: 50px;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+</style>
+<form action="{% url 'cart:update_cart' %}" method="post">
+  {% csrf_token %}
+  <div class="card shopping-cart">
+    <div class="card-header bg-primary text-light">
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      <a href=" " class="text-white">My Cart</a>
+      <a href="/books" class="btn btn-outline-light btn-sm float-right">Continue shopping</a>
+            <button type="submit" name="submit_button" value="edit" class="btn btn-outline-light btn-sm float-right" style="margin-right:6px">Update cart</button>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="card-body">
+      {% for book_in_cart in cart.books.all %}
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-2 text-center">
+          <img {% if book_in_cart.book.photo_cover %} src="{{ MEDIA_URL }}{{ book_in_cart.book.photo_cover.url }}" {% else %} src="https://via.placeholder.com/2000x3000" {% endif %} width="100px" height="150px" class="img-fluid rounded">
+        </div>
+        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+          <h5><strong>{{ book_in_cart.book.books }}</strong></h5>
+          <h4>
+            <small>Author: <strong>{{ book_in_cart.book.author.first }}</strong> </small><br>
+            <small>Rating: <strong>{{ book_in_cart.book.rating }}</strong>&#9733; </small><br>
+            <small>Binding: <strong>{{ book_in_cart.book.get_binding_display }}</strong></small>
+          </h4>
+        </div>
+        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+          <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+            <h6><strong>{{ book_in_cart.book.price }} $ <span class="text-muted"></span></strong></h6>
+          </div>
+          <div class="col-4 col-sm-4 col-md-4">
+            <div class="quantity">
+              <i value="+" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="fas fa-chevron-up"></i>
+              <input type="number" step="1" max="99" min="1" value="{{ book_in_cart.quantity }}" class="text-center" style="border:none; width:28%" name="{{ book_in_cart.pk }}">
+              <i value="-" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="fas fa-chevron-down"></i>
+
+
+
+            </div>
+          </div>
+          <div class="col-2 col-sm-2 col-md-2 text-right">
+            <a href="{% url 'cart:delete_book_in_cart' book_in_cart.pk %}" class="btn btn-outline-danger btn-xs">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <hr>
+      {% endfor %}
+    </div>
+    <div class="card-footer bg-light">
+      <div class="coupon col-md-3 col-sm-5 float-right">
+        <div class="row">
+          <div class="col-6 mt-2">
+            <input type="text" class="form-control" placeholder="cupone code">
+          </div>
+          <div class="col-6 mt-2">
+            <input type="submit" class="btn btn-outline-primary" value="Use cupone">
+          </div>
+        </div>
+      </div>
+      <div class="pull-right" style="margin: 10px">
+        <div class="pull-right" style="margin: 5px">
+          Total price: <strong>{{ cart.total_price }} $</strong><br>
+          Items: <b>{{ cart.total_items  }} </b>
+        </div>
+      </div>
+      <button type="submit" value="checkout" class="btn btn-primary btn-lg btn-block">CheckOut</button>
+
+    </div>
+  </div>
+
+  {% endblock %}

@@ -1,0 +1,61 @@
+{% extends "auth_base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<title>Sign Up</title>
+<!-- {% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+{{ form|crispy }}
+
+<input type="submit" value="login">
+<input type="hidden" name="next" value="{{ next }}">
+</form> -->
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <a href="/account/login">
+      <h2 class="inactive underlineHover"> Sign In </h2>
+    </a>
+    <a href=" ">
+      <h2 class="active">Sign Up </h2>
+    </a>
+    {% for error in form.errors %}
+        <div class="alert alert-warning" role="alert">{{ error }}</div>
+      {% endfor %}
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="https://i.imgur.com/KXce5Ew.jpg" id="icon" alt="User Icon">
+    </div>
+
+
+    <!-- Login Form -->
+
+    <form id="login-form" method="post" action="{% url 'signup' %}">
+      {% csrf_token %}
+      <form>
+        <input type="text" id="login" class="fadeIn second" name="username" placeholder="Username" maxlength="50" value="login" required>
+        <input type="text" id="login" class="fadeIn third" placeholder="First name" maxlength="25"  name="first_name" autocapitalize="word" required>
+        <input type="text" id="login" class="fadeIn fourth" placeholder="Last name" maxlength="25" name="last_name" autocapitalize="word" required>
+        <input type="email" id="login" class="fadeIn fifth" placeholder="Email" name="email"  required>
+        <!-- <input type="text" id="login" class="fadeIn sixth" placeholder="Phone number"  maxlength="40" required> -->
+        <input type="password" id="password" class="fadeIn seventh" name="password1" placeholder="Password" required>
+        <input type="password" id="password" class="fadeIn eighth" name="password2" placeholder="Check password" required>
+        <input type="submit" class="fadeIn eighth" value="Sign Up">
+        <input type="hidden" name="next" value="{{ next }}">
+
+      </form>
+
+  </div>
+</div>
+
+{% endblock %}

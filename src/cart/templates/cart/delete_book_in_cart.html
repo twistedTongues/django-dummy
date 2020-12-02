@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<title>Deleting {{ object.book.books }}</title>
+<style type="text/css">
+
+#delete_book_in_cart {
+  margin-top:100px;
+
+}
+
+</style>
+<!-- <div id="delete_book_in_cart"
+  <h1 class="text-center">Delete book in cart: {{ object.book.books }}?</h1><br>
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-danger">Delete</button>
+  </form>
+</div> -->
+
+
+<div class="jumbotron jumbotron-fluid">
+  <h1>Delete book in cart: {{ object.book.books }}?</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <img src="https://i.imgur.com/ihIyV1f.png"><br>
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+</div>
+{% endblock %}
